@@ -3,20 +3,21 @@
 module main_math ;
     reg  ai, bi ;
     reg SYSCLK;
-	reg counter = 'b1;
+	reg counter;
     parameter SYSCLK_PERIOD = 10;
 
     initial begin
-        bi = 'b1 ;
-        ai = 'b1 ;
+        bi = 'd1 ;
+        ai = 'd0 ;
+        counter = 'd0 ;
+        #5
+        SYSCLK = 1'b0;   
         while (counter<=3) begin
             #10 ;
             ai = ai + 1;
-            bi = bi + 2;
+            bi = bi + 1;
             counter = counter + 1;
         end
-        #5
-        SYSCLK = 1'b0;
     end
 
     initial begin

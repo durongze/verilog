@@ -8,10 +8,14 @@ module lib_math(
 
 always @ (posedge clk)
 begin
-    if (clk)
-        sum <= sum + a;
-    else
-        sum <= sum - b;
+    if (clk) begin
+        sum <= b + a;
+        $display("clk=%d, %d", clk, sum);
+    end
+    else begin
+        sum <= a - b;
+        $display("clk:%d, %d", clk, sum);
+    end
 end
 
 endmodule
