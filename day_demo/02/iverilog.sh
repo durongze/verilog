@@ -1,5 +1,21 @@
 #!/bin/bash
 
+function InstallVerilog()
+{
+    #安装iverilog：
+    which iverilog
+    if [ $? -ne 0 ];then
+        sudo apt-get install iverilog
+    else
+        which vvp
+    fi
+    #安装GTKWave：
+    which gtkwave
+    if [ $? -ne 0 ];then
+        sudo apt-get install gtkwave
+    fi
+}
+
 function CompileLedDemo()
 {
     file_name=$1
@@ -47,6 +63,13 @@ function CleanLedDemo()
     done
 }
 
-CompileLedDemo "main_math"
-TransVhdlLedDemo "lib_math"
-CleanLedDemo "lib_math"
+function ShowTime()
+{
+    echo -e "1 s \t= 1000 ms \n\t= 1000 000 us \n\t= 1000 000 000 ns \n\t= 1000 000 000 000 ps\n"
+}
+
+InstallVerilog
+CompileLedDemo "tb_mul"
+TransVhdlLedDemo "multiplier"
+CleanLedDemo "multiplier"
+ShowTime

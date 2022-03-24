@@ -48,4 +48,5 @@ function CleanLedDemo()
 }
 
 CompileLedDemo "main_math"
-CleanLedDemo "main_math"
+#TransVhdlLedDemo "lib_math"
+CleanLedDemo "lib_math"

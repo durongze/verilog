@@ -48,9 +48,9 @@ function CleanLedDemo()
 }
 
 CompileLedDemo "initial_test"
-TransVhdlLedDemo "initial_test"
+#TransVhdlLedDemo "initial_test"
 CleanLedDemo "initial_test"
 
 CompileLedDemo "always_test"
-TransVhdlLedDemo "always_test"
+#TransVhdlLedDemo "always_test"
 CleanLedDemo "always_test"

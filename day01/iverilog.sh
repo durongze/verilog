@@ -18,7 +18,8 @@ function InstallVerilog()
 
 function CompileLedDemo()
 {
-    v_file="led_demo_tb.v"
+    file_name=$1
+    v_file="$file_name.v"
     vcd_file="wave.vcd"
     ls
     echo -e "\033[32m iverilog -o wave -y ./ $v_file \033[0m"
@@ -34,8 +35,9 @@ function CompileLedDemo()
 
 function TransVhdlLedDemo()
 {
-    v_file="led_demo.v"
-    vhd_file="led_demo.vhd"
+    file_name=$1
+    v_file="$file_name.v"
+    vhd_file="$file_name.vhd"
     ls
     echo -e "\033[32m iverilog -tvhdl -o $vhd_file $v_file \033[0m"
     iverilog -tvhdl -o $vhd_file $v_file
@@ -47,7 +49,8 @@ function TransVhdlLedDemo()
 
 function CleanLedDemo()
 {
-    FileList="wave wave.vcd led_demo.vhd a.out ivl_vhdl_work"
+    file_name=$1
+    FileList="wave wave.vcd $file_name.vhd a.out ivl_vhdl_work"
     for f in $FileList
     do
         if [[ -f $f ]];then
@@ -66,7 +69,7 @@ function ShowTime()
 }
 
 InstallVerilog
-#CompileLedDemo
-TransVhdlLedDemo
-CleanLedDemo
+CompileLedDemo "led_demo_tb"
+TransVhdlLedDemo "led_demo"
+CleanLedDemo "led_demo"
 ShowTime
