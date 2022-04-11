@@ -15,6 +15,14 @@ public:
             ps_[i] = Point<T>(i, i);
         }
     }
+    void ReInit(int num) {
+        ps_.resize(num);
+        static int x = 0;
+        ++x;
+        for (auto i = 0; i < num; i++) {
+            ps_[i] = Point<T>(x, i);
+        }
+    }
     int GetVectorX(std::vector<T> &x) const {
         x.resize(ps_.size());
         for (auto i = 0; i < ps_.size(); ++i) {

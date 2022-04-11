@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMap>
+#include <QVector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,7 +23,7 @@ public slots:
     void mouseReleaseEvent(QMouseEvent*);
 private:
     Ui::MainWindow *ui;
-    QVector<double> x;
-    QVector<double> y;
+    QMap<int, QVector<double> > x;
+    QMap<int, QVector<double> > y;
 };
 #endif // MAINWINDOW_H

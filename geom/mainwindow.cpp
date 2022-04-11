@@ -22,23 +22,39 @@ MainWindow::~MainWindow()
 
 void MainWindow::SetGraphic(QVector<double> &xs, QVector<double> &ys)
 {
-    x = xs;
-    y = ys;
+    x[x.size()] = xs;
+    y[y.size()] = ys;
 }
 
 void MainWindow::SetGraphic(std::vector<double> &xs, std::vector<double> &ys)
 {
-    StlUtils<double>::VectorToQVector(x, xs);
-    StlUtils<double>::VectorToQVector(y, ys);
+    StlUtils<double>::VectorToQVector(x[x.size()], xs);
+    StlUtils<double>::VectorToQVector(y[y.size()], ys);
 }
 
 void MainWindow::GraphShow()
 {
-    ui->customPlot->graph(0)->setData(x,y);
+    for (auto idx = ui->customPlot->graphCount(); idx < x.size(); ++idx) {
+        ui->customPlot->addGraph();
+    }
+    for (auto idx = 0; idx < x.size(); ++idx) {
+        ui->customPlot->graph(idx)->setData(x[idx], y[idx]);
+    }
+
+    QString graphCount = "graphCount:";
+    graphCount += QString::fromStdString(std::to_string(ui->customPlot->graphCount()));
+    ui->customPlotLabel->setText(graphCount);
+
     ui->customPlot->replot();
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent*)
 {
-
+    Geom<double> geom;
+    geom.ReInit(6);
+    std::vector<double> x;
+    std::vector<double> y;
+    geom.GetVectorX(x);
+    geom.GetVectorY(y);
+    SetGraphic(x, y);
 }
